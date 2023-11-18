@@ -1,1 +1,204 @@
 /* You can add global styles to this file, and also import other style files */
+@charset "UTF-8";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+
+:root {
+    --primary: #0b303b;
+    --hover-color: #17547e;;
+
+    --gray0: #F0F3F6;
+    --gray100: #E8EFFB;
+    --gray200: #D9E3F3;
+    --gray300: #C7D4E7;
+    --gray400: #B4C2D6;
+    --gray500: #9DABBF;
+    --gray600: #828EA1;
+    --gray700: #616B7A;
+    --gray800: #3D444D;
+    --gray900: #181B1F;
+
+    --blue0: #F5FAFF;
+    --blue100: #C5E2FD;
+    --blue200: #98CAF9;
+    --blue300: #70B3F2;
+    --blue400: #509FE9;
+    --blue500: #388DDD;
+    --blue600: #277DCD;
+    --blue700: #1B6CB8;
+    --blue800: #135CA0;
+    --blue900: #0E4C87;
+
+    --red0: #FFF5F5;
+    --red100: #FDC5C5;
+    --red200: #F99898;
+    --red300: #F27070;
+    --red400: #E95050;
+    --red500: #DD3838;
+    --red600: #CD2727;
+    --red700: #B81B1B;
+    --red800: #A01313;
+    --red900: #870E0E;
+
+    --orange0: #FFF9F5;
+    --orange100: #FDDCC5;
+    --orange200: #F9BE98;
+    --orange300: #F2A470;
+    --orange400: #E98E50;
+    --orange500: #DD7A38;
+    --orange600: #CD6927;
+    --orange700: #B85A1B;
+    --orange800: #A04B13;
+    --orange900: #873E0E;
+
+    --green0: #F5FFFA;
+    --green100: #C6F6D5;
+    --green200: #9AE6B4;
+    --green300: #68D391;
+    --green400: #48BB78;
+    --green500: #38A169;
+    --green600: #2F855A;
+    --green700: #276749;
+    --green800: #22543D;
+    --green900: #1C4532;
+
+    --teal0: #E6FFFA;
+    --teal100: #B2F5EA;
+    --teal200: #81E6D9;
+    --teal300: #4FD1C5;
+    --teal400: #38B2AC;
+    --teal500: #319795;
+    --teal600: #2C7A7B;
+    --teal700: #285E61;
+    --teal800: #234E52;
+    --teal900: #1D4044;
+
+    --pink0: #FEF6F7;
+    --pink100: #F8D9E2;
+    --pink200: #F2B9CE;
+    --pink300: #E98EB2;
+    --pink400: #DE6EA4;
+    --pink500: #C64D8A;
+    --pink600: #C64D8A;
+    --pink700: #AB3F7E;
+    --pink800: #8C316B;
+    --pink900: #4C1F40;
+
+    --purple0: #F9F6FE;
+    --purple100: #E6D9FA;
+    --purple200: #D2BEF6;
+    --purple300: #B297EE;
+    --purple400: #997EE3;
+    --purple500: #7A5FCE;
+    --purple600: #664BBA;
+    --purple700: #514095;
+    --purple800: #413676;
+    --purple900: #302856;
+
+    --box-shadow: 0px 5px 14px 0px #00000052;
+
+    --global-content-size: 1400px;
+    --header-height: 96px;
+    --main-br: .6rem;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    display: block;
+    position: relative;
+    margin: 0;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    background: linear-gradient(127deg,
+            rgb(190, 185, 242) 0%,
+            rgb(197, 180, 217) 29%,
+            rgb(252, 217, 210) 65%,
+            rgb(197, 180, 217) 100%);
+}
+
+/* RESET CSS BELOW */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* RESET CSS END */
+
+.divider {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 1.25rem 0;
+    background-color: var(--primary);
+}

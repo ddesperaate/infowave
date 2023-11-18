@@ -1,0 +1,180 @@
+.news {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0.5rem 0 1rem;
+    z-index: 0;
+
+    .show-btn {
+        display: flex;
+        align-items: center;
+        padding: 10px 1rem;
+        color: #fff;
+        background-color: var(--primary);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: var(--hover-color);
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin-left: .5rem;
+        min-height: 50vh;
+        width: 100%;
+        background-color: var(--gray0);
+        border-radius: var(--main-br);
+        padding: 1rem;
+
+        &__news {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .top-new {
+            display: flex;
+            position: relative;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+
+            &:hover .top-new__image img {
+                transform: scale(1.1);
+            }
+
+            &__image {
+                display: block;
+
+                & img {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    transition: transform .5s;
+                }
+            }
+
+            &__actions {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: rgba(61, 61, 61, 0.25);
+                padding: 0.4rem 1rem;
+            }
+
+            &__title {
+                display: block;
+                font-size: 2rem;
+                font-weight: 700;
+            }
+        }
+
+        .catalog {
+            max-width: 1090px;
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+
+            @supports (grid-area: auto) {
+                display: grid;
+                grid-gap: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                grid-auto-rows: 1fr;
+            }
+
+            &__item {
+                flex: 1 0 350px;
+                margin: 0.25em;
+                background-color: #fff;
+                color: var(--primary);
+                padding: 1em;
+                @supports (grid-area: auto) {
+                    margin: 0;
+                }
+                border-radius: 6px;
+            }
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                transition: box-shadow 0.3s;
+                cursor: pointer;
+
+                &:hover {
+                    box-shadow: var(--box-shadow);
+                }
+                &:hover img {
+                    transform: scale(1.03);
+                }
+
+                &__image {
+                    width: 100%;
+                    overflow: hidden;
+
+                    img {
+                        height: 208px;
+                        width: 100%;
+                        object-fit: cover;
+                        transition: transform 0.3s;
+                    }
+                }
+
+                &__details {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    margin: 1.5rem 0;
+                }
+
+                &__title {
+                    font-size: 1rem;
+                    font-weight: 700;
+                    line-height: 1.25;
+                }
+
+                &__details-data {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    span {
+                        font-size: 0.8rem;
+                        line-height: 1;
+                        font-weight: 400;
+                        color: var(--gray400);
+                    }
+                }
+            }
+
+            &__loader {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 50vh;
+            }
+        }
+
+        .paginator-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-top: 1.5rem;
+
+            .p-element {
+                width: 100%;
+            }
+        }
+    }
+}

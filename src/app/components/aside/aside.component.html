@@ -1,0 +1,50 @@
+<aside class="aside">
+
+    <div class="section">
+        <div class="section__title">
+            <i class="pi pi-book" style="font-size: 1rem"></i>
+            <span class="text">Види публікації</span>
+        </div>
+        <div class="section__values">
+            <div *ngFor="let category of categories" class="field-checkbox">
+                <p-checkbox name="group" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
+                <label [for]="category.key">{{ category.name }}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section__title">
+            <i class="pi pi-book" style="font-size: 1rem"></i>
+            <span class="text">Види публікації</span>
+        </div>
+        <div class="section__values">
+            <div *ngFor="let type of newsTypes" class="field-checkbox">
+                <p-checkbox name="group" [value]="type" [(ngModel)]="selectedNewsTypes" [inputId]="type.key"></p-checkbox>
+                <label [for]="type.key">{{ type.name }}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section__title">
+            <i class="pi pi-book" style="font-size: 1rem"></i>
+            <span class="text">Мова</span>
+        </div>
+        <div class="section__values">
+            <div *ngFor="let lang of langsList" class="field-checkbox">
+                <p-checkbox name="group" [value]="lang" [(ngModel)]="selectedLangs" [inputId]="lang.key"></p-checkbox>
+                <label [for]="lang.key">{{ lang.name }}</label>
+            </div>
+        </div>
+    </div>
+
+    <div (click)="findNews()" class="aside__find-btn">
+        <i class="pi pi-search" style="color: #fff"></i>
+        <span>Шукати</span>
+    </div>
+
+
+
+
+</aside>

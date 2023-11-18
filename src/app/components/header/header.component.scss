@@ -1,0 +1,74 @@
+.header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--gray0);
+    padding: .6rem 1rem;
+    margin-top: .5rem;
+    border-radius: var(--main-br);
+    z-index: 1000;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+
+        img {
+            display: block;
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+
+    &__site-name {
+        display: block;
+        font-size: 2.2rem;
+        font-weight: 900;
+        cursor: pointer;
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+
+        &-list {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        height: 50px;
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        background-color: var(--primary);
+        height: 100%;
+        padding: 0 30px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color .2s;
+
+        &:hover {
+            background-color: var(--hover-color);
+        }
+    }
+
+    .p-inputtext {
+        border-radius: 6px;
+    }
+}

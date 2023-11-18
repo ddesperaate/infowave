@@ -1,0 +1,43 @@
+<header class="header">
+    <div class="header__logo">
+        <img src="/assets/images/logo.png" alt="Logo">
+        <h3 class="header__site-name">infowavedaily</h3>
+    </div>
+
+    <div class="header__links">
+        <ul class="header__links-list">
+            <li>
+                <a [routerLink]="'/news'">Новини</a>
+            </li>
+            <li>
+                <a [routerLink]="'/'">Рубрики</a>
+            </li>
+            <li>
+                <a [routerLink]="'/'">Ресурси</a>
+            </li>
+            <li>
+                <a [routerLink]="'/'">Про нас</a>
+            </li>
+            <li>
+                <a [routerLink]="'/'">Контакти</a>
+            </li>
+        </ul>
+
+        <div class="header__search">
+            <div class="card flex flex-wrap justify-content-center gap-3">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <!-- <i class="pi pi-spin pi-spinner"></i> -->
+                    <input type="text" pInputText [(ngModel)]="searchText" placeholder="Пошук..." />
+                </span>
+            </div>
+            <div class="header__button">
+                <i class="pi pi-search" style="color: #fff"></i>
+            </div>
+        </div>
+    </div>
+    <div class="header__time-data">
+        {{ nowDate | date: 'shortDate' }}
+        {{ nowDate | date: 'h:mm' }}
+    </div>
+</header>
