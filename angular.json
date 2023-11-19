@@ -20,6 +20,7 @@
             "outputPath": "dist/infowave",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "baseHref": "/infowave/",
             "polyfills": [
               "zone.js"
             ],
