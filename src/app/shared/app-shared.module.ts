@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { RouterModule } from '@angular/router';
 import { DividerModule } from 'primeng/divider';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 const imports = [
     CommonModule,
@@ -33,7 +34,9 @@ const imports = [
     CheckboxModule,
     CalendarModule,
     DividerModule,
-    ScrollTopModule
+    ScrollTopModule,
+    DynamicDialogModule,
+    
 ];
 
 @NgModule({

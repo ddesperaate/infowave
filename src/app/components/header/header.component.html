@@ -1,19 +1,19 @@
 <header class="header">
-    <div class="header__logo">
+    <a [routerLink]="'/'" class="header__logo">
         <img src="assets/images/logo.png" alt="Logo">
         <h3 class="header__site-name">infowavedaily</h3>
-    </div>
+    </a>
 
     <div class="header__links">
         <ul class="header__links-list">
+            <li>
+                <a [routerLink]="'/'">Головна</a>
+            </li>
             <li>
                 <a [routerLink]="'/news'">Новини</a>
             </li>
             <li>
                 <a [routerLink]="'/'">Рубрики</a>
-            </li>
-            <li>
-                <a [routerLink]="'/'">Ресурси</a>
             </li>
             <li>
                 <a [routerLink]="'/'">Про нас</a>

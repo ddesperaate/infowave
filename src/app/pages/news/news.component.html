@@ -22,7 +22,7 @@
                 Новини
             </h2>
             <div *ngIf="isDataLoaded" class="catalog">
-                <div *ngFor="let article of articles" class="catalog__item item">
+                <div *ngFor="let article of articles" (click)="showNewsDetails()" class="catalog__item item">
                     <div class="item__image">
                         <img [src]="article.image" alt="">
                         <div class="item__details">
