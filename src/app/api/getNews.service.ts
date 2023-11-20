@@ -10,23 +10,32 @@ import { AppConsts } from '../shared/AppConsts';
 })
 export class GetNewsService {
   API_URL: string = AppConsts.API_URL;
+  API_URL_DETAILS: string = AppConsts.API_URL_DETAILS;
   API_KEY: string = AppConsts.API_KEY;
-  category: string | string[] = 'news/Politics'
-  searchString: string | string[] = '';
+  category: string | string[] = AppConsts.newsCategoriesList.map(c => c.key);
+  dataTypes: string | string[] = AppConsts.newsTypes.map(t => t.key);
+  searchString: string = '';
   sortByString: string = 'date';
-  langs: string[] = ['ukr'];
+  page: number = 1;
+  articlesCount: number = 12;
+  langs: string[] | string = ['ukr'];
+
   constructor(
     private http: HttpClient,
-    private filtersService: FiltersService,
+    private _filtersService: FiltersService,
   ) {
   }
 
   initListeners(): void {
-    this.filtersService.getParams().subscribe(params => {
+    this._filtersService.getParams().subscribe(params => {
+      console.log('?paramsChanged??');
       this.category = params.category;
+      this.dataTypes = params.types;
       this.searchString = params.searchString;
       this.sortByString = params.sortByString;
       this.langs = params.langs;
+      this.page = params.page + 1;
+      this.articlesCount = params.articlesCount;
     })
   }
 
@@ -35,29 +44,44 @@ export class GetNewsService {
       action: 'getArticles',
       keyword: this.searchString,
       categoryUri: this.category,
-      articlesPage: 1,
-      articlesCount: 12,
+      articlesPage: this.page,
+      articlesCount: this.articlesCount,
       articlesSortBy: this.sortByString || 'date',
       lang: this.langs,
       articlesSortByAsc: false,
       resultType: 'articles',
       apiKey: this.API_KEY,
-      dataType: [
-        'news',
-        'pr',
-        'blog',
-      ],
+      ignoreSourceUri: ['unn.ua', 'nr2.com.ua', 'day.kyiv.ua', 'radioera.com.ua'],
+      dataType: this.dataTypes,
       forceMaxDataTimeWindow: 31,
+    }
+
+    console.log(params, 'REQUESTED');
+    // return new Observable();
+
+    return this.http
+      .post(this.API_URL, params)
+      .pipe(catchError(this.handleError));
+  }
+
+
+  getArticleDetails(uri): Observable<any> {
+    const params = {
+      action: 'getArticle',
+      articleUri: uri,
+      infoArticleBodyLen: -1,
+      resultType: 'info',
+      apiKey: this.API_KEY,
+      includeArticleConcepts: true,
+      includeArticleCategories: true,
     }
 
     // return new Observable();
 
     return this.http
-      .post(this.API_URL, params)
+      .post(this.API_URL_DETAILS, params)
       .pipe(retry(1), catchError(this.handleError));
   }
-
-
 
   handleError(error: any) {
     let errorMessage = '';
@@ -73,5 +97,4 @@ export class GetNewsService {
       return errorMessage;
     });
   }
-
 }

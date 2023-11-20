@@ -6,7 +6,7 @@
         </div>
 
         <div class="content__news">
-            <div class="content__top-new top-new">
+            <div *ngIf="false" class="content__top-new top-new">
                 <div class="top-new__image">
                     <img src="https://placehold.co/1090x400" alt="">
                 </div>
@@ -22,7 +22,7 @@
                 Новини
             </h2>
             <div *ngIf="isDataLoaded" class="catalog">
-                <div *ngFor="let article of articles" (click)="showNewsDetails()" class="catalog__item item">
+                <div *ngFor="let article of articles" (click)="showNewsDetails(article)" class="catalog__item item">
                     <div class="item__image">
                         <img [src]="article.image" alt="">
                         <div class="item__details">
@@ -44,6 +44,9 @@
             <div *ngIf="!isDataLoaded" class="catalog__loader">
                 <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
             </div>
+            <!-- <div class="paginator-container">
+                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalCount" [rowsPerPageOptions]="[12, 24, 72]"></p-paginator>
+            </div> -->
         </div>
     </div>
 </div>

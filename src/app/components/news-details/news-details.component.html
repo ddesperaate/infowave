@@ -1,0 +1,39 @@
+<div class="details">
+    <div *ngIf="isDataLoaded" class="details__body">
+        <div class="details__top-section top-section">
+            <a [href]="newsDetail.url" target="_blank" [title]="newsDetail.source?.dataType" class="top-section__source-info">
+                <span class="title">{{ newsDetail.source.title }}</span>
+                <span class="url">{{ newsDetail.source.uri + ' ' +  newsDetail.date + ' ' + newsDetail.time}}</span>
+            </a>
+            <div class="top-section__image">
+                <img [src]="newsDetail.image" [alt]="newsDetail.source.title">
+            </div>
+            <div class="top-section__authors">
+                <span class="author">Автори:</span> 
+                <a *ngFor="let author of newsDetail.authors" [href]="author.uri" target="_blank" class="author-name">
+                    {{ author.name }}
+                </a>
+                <span class="no-authors" *ngIf="!newsDetail.authors || newsDetail.authors?.length === 0"> (не зазначено) </span>
+            </div>
+            <div class="details__categories">
+                <p-chip *ngFor="let cat of newsDetail.categories" [label]="getCategoryName(cat.label)"></p-chip>
+            </div>
+        </div>
+        <h1 class="title">{{ newsDetail.title }}</h1>
+        <div class="divider"></div>
+        <div class="details__top-section main-info">
+            <span *ngFor="let t of newsDetail.body.split('\n')">{{ t }} <br></span>
+        </div>
+        <div class="divider"></div>
+
+        <div class="details__categories">
+            <p-chip *ngFor="let cat of newsDetail.categories" [label]="getCategoryName(cat.label)"></p-chip>
+        </div>
+        <div class="details__footer">
+            <div (click)="simulateEscapeKey()" class="return-btn">Повернутися до інших новин</div>
+        </div>
+    </div>
+    <div *ngIf="!isDataLoaded" class="details__loader">
+        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    </div>
+</div>

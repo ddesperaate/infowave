@@ -1,9 +1,9 @@
-<aside class="aside">
+<aside (click)="showState()" class="aside">
 
     <div class="section">
         <div class="section__title">
             <i class="pi pi-book" style="font-size: 1rem"></i>
-            <span class="text">Види публікації</span>
+            <span class="text">Рубрики</span>
         </div>
         <div class="section__values">
             <div *ngFor="let category of categories" class="field-checkbox">
@@ -15,7 +15,7 @@
 
     <div class="section">
         <div class="section__title">
-            <i class="pi pi-book" style="font-size: 1rem"></i>
+            <i class="pi pi-tags" style="font-size: 1rem"></i>
             <span class="text">Види публікації</span>
         </div>
         <div class="section__values">
@@ -28,7 +28,7 @@
 
     <div class="section">
         <div class="section__title">
-            <i class="pi pi-book" style="font-size: 1rem"></i>
+            <i class="pi pi-volume-up" style="font-size: 1rem"></i>
             <span class="text">Мова</span>
         </div>
         <div class="section__values">

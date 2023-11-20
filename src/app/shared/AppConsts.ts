@@ -1,6 +1,7 @@
 
 export class AppConsts {
     static readonly API_URL = 'https://newsapi.ai/api/v1/article/getArticles';
+    static readonly API_URL_DETAILS = 'http://eventregistry.org/api/v1/article/getArticle';
     static readonly API_KEY = 'c31b04f5-f6dd-42de-8549-7aa8bde87056';
 
     static readonly newsCategoriesList: any[] = [

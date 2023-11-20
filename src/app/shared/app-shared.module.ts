@@ -16,9 +16,13 @@ import { RouterModule } from '@angular/router';
 import { DividerModule } from 'primeng/divider';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { BrowserModule } from '@angular/platform-browser';
+import { ChipModule } from 'primeng/chip';
+import { MessagesModule } from 'primeng/messages';
 
 const imports = [
     CommonModule,
+    BrowserModule,
     RouterModule,
     FormsModule,
     HttpClientModule,
@@ -36,7 +40,8 @@ const imports = [
     DividerModule,
     ScrollTopModule,
     DynamicDialogModule,
-    
+    ChipModule,
+    MessagesModule,
 ];
 
 @NgModule({

@@ -7,9 +7,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AppSharedModule } from './shared/app-shared.module';
 import { HeaderComponentModule } from './components/header/header.component.module';
 import { FooterComponentModule } from './components/footer/footer.component.module';
-import { AsideComponent } from './components/aside/aside.component';
 import { NewsPageComponentModule } from './pages/news/news.component.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common'; 
 // import { AsideComponentModule } from './components/aside/aside.component.module';
 
 
@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

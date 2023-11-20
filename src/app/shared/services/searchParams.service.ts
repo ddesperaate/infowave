@@ -7,7 +7,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FiltersService {
 
-  private params: BehaviorSubject<RouteApiParams>;
+  private params: BehaviorSubject<RouteApiParams> = new BehaviorSubject({
+    searchString: '',
+    category: [''],
+    types: [''],
+    sortByString: '',
+    langs: [''],
+    page: 1,
+    articlesCount: 12,
+  });
   private routePrarms: RouteApiParams = new RouteApiParams();
 
   constructor(
@@ -33,9 +41,10 @@ export class FiltersService {
 
 export class RouteApiParams {
   searchString!: string | null;
-  category!: string | null;
+  category!: string | string[] | null;
+  types!: string | string[] | undefined
   sortByString!: string | null;
-  langs!: string[] | null;
+  langs!: string |  string[] | null;
   page!: number;
   articlesCount!: number;
 }
