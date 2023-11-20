@@ -28,7 +28,7 @@
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <!-- <i class="pi pi-spin pi-spinner"></i> -->
-                    <input type="text" pInputText [(ngModel)]="searchText" placeholder="Пошук..." />
+                    <input type="text" pInputText (ngModelChange)="searchArticlesWithSearchWord($event)" [(ngModel)]="searchText" placeholder="Пошук..." />
                 </span>
             </div>
             <div class="header__button">
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="header__time-data">
-        {{ nowDate | date: 'shortDate' }}
-        {{ nowDate | date: 'h:mm' }}
+        <span>{{ nowDate | date: 'h:mm' }}</span>
+        <span><b>{{ nowDate | date: 'dd.M.yyy' }}</b></span>
     </div>
 </header>

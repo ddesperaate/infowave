@@ -92,6 +92,13 @@
             background-color: var(--hover-color);
         }
     }
+    
+    &__time-data {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
     .p-inputtext {
         border-radius: 6px;

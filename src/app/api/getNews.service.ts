@@ -6,28 +6,42 @@ import { FiltersService } from '../shared/services/searchParams.service';
 import { AppConsts } from '../shared/AppConsts';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GetNewsService {
   API_URL: string = AppConsts.API_URL;
   API_URL_DETAILS: string = AppConsts.API_URL_DETAILS;
   API_KEY: string = AppConsts.API_KEY;
-  category: string | string[] = AppConsts.newsCategoriesList.map(c => c.key);
-  dataTypes: string | string[] = AppConsts.newsTypes.map(t => t.key);
+  category: string | string[] = AppConsts.newsCategoriesList.map((c) => c.key);
+  dataTypes: string | string[] = AppConsts.newsTypes.map((t) => t.key);
   searchString: string = '';
   sortByString: string = 'date';
   page: number = 1;
   articlesCount: number = 12;
   langs: string[] | string = ['ukr'];
+  urlExludes: string[] = [
+    'unn.ua',
+    'nr2.com.ua',
+    'day.kyiv.ua',
+    'radioera.com.ua',
+    'portal.lviv.ua',
+    'mk-mari.ru',
+    'rg.ru',
+    'altapress.ru',
+    'nplus1.ru',
+    'pnp.ru',
+    'ng.ru',
+    'rusjev.net',
+    'ua.interfax.com.ua',
+  ];
 
   constructor(
     private http: HttpClient,
-    private _filtersService: FiltersService,
-  ) {
-  }
+    private _filtersService: FiltersService
+  ) {}
 
   initListeners(): void {
-    this._filtersService.getParams().subscribe(params => {
+    this._filtersService.getParams().subscribe((params) => {
       console.log('?paramsChanged??');
       this.category = params.category;
       this.dataTypes = params.types;
@@ -36,7 +50,7 @@ export class GetNewsService {
       this.langs = params.langs;
       this.page = params.page + 1;
       this.articlesCount = params.articlesCount;
-    })
+    });
   }
 
   getArticles(): Observable<any> {
@@ -51,10 +65,10 @@ export class GetNewsService {
       articlesSortByAsc: false,
       resultType: 'articles',
       apiKey: this.API_KEY,
-      ignoreSourceUri: ['unn.ua', 'nr2.com.ua', 'day.kyiv.ua', 'radioera.com.ua'],
+      ignoreSourceUri: this.urlExludes,
       dataType: this.dataTypes,
       forceMaxDataTimeWindow: 31,
-    }
+    };
 
     console.log(params, 'REQUESTED');
     // return new Observable();
@@ -63,7 +77,6 @@ export class GetNewsService {
       .post(this.API_URL, params)
       .pipe(catchError(this.handleError));
   }
-
 
   getArticleDetails(uri): Observable<any> {
     const params = {
@@ -74,7 +87,7 @@ export class GetNewsService {
       apiKey: this.API_KEY,
       includeArticleConcepts: true,
       includeArticleCategories: true,
-    }
+    };
 
     // return new Observable();
 

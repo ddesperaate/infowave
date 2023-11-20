@@ -79,6 +79,15 @@
             }
         }
 
+        &__title-header {
+            display: flex;
+            align-items: center;
+    
+            .pi-spinner {
+                margin-left: .7rem;
+            }
+        }
+
         .catalog {
             max-width: 1090px;
             display: flex;
@@ -137,6 +146,34 @@
                     margin: 1.5rem 0;
                 }
 
+                &__types-list {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+
+                    .type {
+                        display: block;
+                        font-size: .7rem;
+                        font-weight: 700;
+                        color: #fff;
+                        padding: 8px 12px;
+                        border-radius: 8px;
+                        margin-right: 8px;
+
+                        &--news {
+                            background-color: var(--green600);
+                        }
+
+                        &--blog {
+                            background-color: var(--blue600);
+                        }
+
+                        &--pr {
+                            background-color: var(--orange700);
+                        }
+                    }
+                }
+
                 &__title {
                     font-size: 1rem;
                     font-weight: 700;
@@ -154,6 +191,11 @@
                         font-weight: 400;
                         color: var(--gray400);
                     }
+                }
+
+                &__date-time {
+                    display: flex;
+                    align-items: center;
                 }
             }
 

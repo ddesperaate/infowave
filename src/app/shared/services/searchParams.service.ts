@@ -1,6 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { AppConsts } from '../AppConsts';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ export class FiltersService {
 
   private params: BehaviorSubject<RouteApiParams> = new BehaviorSubject({
     searchString: '',
-    category: [''],
-    types: [''],
-    sortByString: '',
-    langs: [''],
+    category: AppConsts.newsCategoriesList.map((c) => c.key),
+    types: AppConsts.newsTypes.map((t) => t.key),
+    sortByString: 'date',
+    langs: ['ukr'],
     page: 1,
     articlesCount: 12,
   });

@@ -6,7 +6,7 @@
         </div>
 
         <div class="content__news">
-            <div *ngIf="false" class="content__top-new top-new">
+            <div class="content__top-new top-new">
                 <div class="top-new__image">
                     <img src="https://placehold.co/1090x400" alt="">
                 </div>
@@ -18,9 +18,12 @@
                 </div>
             </div>
             <div class="divider"></div>
-            <h2 class="content__title">
-                Новини
-            </h2>
+            <div class="content__title-header">
+                <h2 class="content__title">
+                    Новини
+                </h2>
+                <i *ngIf="!isPageLoaded" class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+            </div>
             <div *ngIf="isDataLoaded" class="catalog">
                 <div *ngFor="let article of articles" (click)="showNewsDetails(article)" class="catalog__item item">
                     <div class="item__image">
@@ -30,10 +33,15 @@
                         </div>
                     </div>
                     <div class="item__details-data">
-                        <span class="item__date-time">        
-                            {{ article.date | date: 'shortDate' }}
-                            {{ article.time }}
-                        </span>
+                        <div class="item__date-time">
+                            <div class="item__types-list">
+                                <span [class]="getArticleTypeClass(article.dataType)">
+                                    {{ getArticleTypeName(article.dataType) }}
+                                </span>
+                            </div>        
+                            <span>{{ article.date | date: 'shortDate' }}</span>
+                            <span>{{ article.time }}</span>
+                        </div>
                         <span class="item__source-url">{{ article.source?.uri }}</span>
                     </div>
                 </div>

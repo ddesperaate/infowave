@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +30,10 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     
   ],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/infowave/' }],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/infowave/' },
+    // {provide: LOCALE_ID, useValue: 'us'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

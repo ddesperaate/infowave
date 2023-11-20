@@ -12,7 +12,7 @@ export class AsideComponent implements OnInit {
   categories = AppConsts.newsCategoriesList;
   selectedCategories: any = AppConsts.newsCategoriesList;
   newsTypes = AppConsts.newsTypes;
-  selectedNewsTypes: any = [AppConsts.newsTypes[0]];
+  selectedNewsTypes: any = AppConsts.newsTypes;
   langsList = AppConsts.lagsList;
   selectedLangs: any = [AppConsts.lagsList[0]];
 

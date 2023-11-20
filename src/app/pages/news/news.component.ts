@@ -4,29 +4,33 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GetNewsService } from 'src/app/api/getNews.service';
 import { NewsDetailsComponent } from 'src/app/components/news-details/news-details.component';
 import { NewsDetailsService } from 'src/app/shared/services/newsDetailsData.service';
-import { FiltersService, RouteApiParams } from 'src/app/shared/services/searchParams.service';
+import {
+  FiltersService,
+  RouteApiParams,
+} from 'src/app/shared/services/searchParams.service';
 
 @Component({
   selector: 'news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
-  providers: [DialogService, MessageService]
+  providers: [DialogService, MessageService],
 })
 export class NewsPageComponent implements OnInit {
   searchText: string = '';
   articles: NewsArticle[] = [];
   isDataLoaded: boolean = false;
+  isPageLoaded: boolean = false;
   first: number = 0;
   rows: number = 12;
-  totalCount: number = 99999;
+  totalCount: number = 100;
   dialogRef: DynamicDialogRef | undefined;
   constructor(
     private _getNewsService: GetNewsService,
     private _newsDetailsService: NewsDetailsService,
     private _filtersService: FiltersService,
     public dialogService: DialogService,
-    public messageService: MessageService,
-  ) { }
+    public messageService: MessageService
+  ) {}
 
   @HostListener('document:keydown.escape', ['$event'])
   handleEscape(event: KeyboardEvent) {
@@ -36,24 +40,29 @@ export class NewsPageComponent implements OnInit {
   ngOnInit(): void {
     this.getStartNews();
     this._getNewsService.initListeners();
-    this._filtersService.getParams().subscribe((params)=> {
-      this.isDataLoaded = false;
-      setTimeout(()=> this.getStartNews(), 50)
-    })
+    this._filtersService.getParams().subscribe((params) => {
+      setTimeout(() => this.getStartNews(), 50);
+    });
   }
 
   getStartNews() {
-    this.isDataLoaded = false;
+    this.isPageLoaded = false;
     this._getNewsService.getArticles().subscribe((res) => {
       if (res?.error) {
         console.log(res);
-        this.messageService.add({ severity: 'error', summary: 'Сталася помилка', detail: res?.error });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Сталася помилка',
+          detail: res?.error,
+        });
         return;
       }
       console.log(res, '===============');
       this.totalCount = res.articles.totalResults;
       this.articles = res.articles.results;
-      setTimeout(()=> this.isDataLoaded = true, 1000);
+      this.isDataLoaded = true;
+      this.isPageLoaded = true;
+      // setTimeout(()=> this.isDataLoaded = true, 1000);
     });
   }
 
@@ -64,6 +73,11 @@ export class NewsPageComponent implements OnInit {
     params.page = event.page;
     params.articlesCount = event.rows;
     this._filtersService.setParams(params);
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 
   showNewsDetails(article: NewsArticle): void {
@@ -78,6 +92,38 @@ export class NewsPageComponent implements OnInit {
       data: article,
     });
     this._newsDetailsService.fetchArticleDetailsDataFromAPI(article.uri);
+  }
+
+  getArticleTypeClass(type): string {
+    let articleTypeClass: string = 'type type';
+    switch (type) {
+      case 'news':
+        articleTypeClass += '--news';
+        break;
+      case 'blog':
+        articleTypeClass += '--blog';
+        break;
+      case 'pr':
+        articleTypeClass += '--pr';
+        break;
+    }
+    return articleTypeClass;
+  }
+
+  getArticleTypeName(type): string {
+    let articleTypeName: string = 'Новина';
+
+    switch (type) {
+      case 'blog':
+        articleTypeName = 'Блог';
+        break;
+      case 'pr':
+        articleTypeName = 'Пресс реліз';
+        break;
+      default:
+        break;
+    }
+    return articleTypeName;
   }
 }
 
