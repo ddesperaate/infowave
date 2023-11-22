@@ -125,6 +125,19 @@ export class NewsPageComponent implements OnInit {
     }
     return articleTypeName;
   }
+
+  parseStringToDate(dateString: string): Date {
+    if (!dateString) return new Date();
+    const dateParts = dateString.split('-');
+
+    const year = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1;
+    const day = parseInt(dateParts[2], 10);
+
+    const parsedDate = new Date(year, month, day);
+
+    return parsedDate;
+  }
 }
 
 export class NewsArticle {

@@ -42,7 +42,7 @@
                                     {{ getArticleTypeName(article.dataType) }}
                                 </span>
                             </div>        
-                            <span>{{ article.date | date: 'dd.M.yyy' }}</span>
+                            <span>{{ parseStringToDate(article.date) | date: 'dd.M.yyy' }}</span>
                             <span>{{ article.time }}</span>
                         </div>
                         <span class="item__source-url">{{ article.source?.uri }}</span>
