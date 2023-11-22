@@ -1,63 +1,75 @@
 <div class="news">
-    <app-aside-component> </app-aside-component>
-    <div class="news__content content">
-        <div class="content__header">
-            <h1>Усі публікації</h1>
-        </div>
+  <app-aside-component> </app-aside-component>
+  <div class="news__content content">
+    <div class="content__header">
+      <h1>Усі публікації</h1>
+    </div>
 
-        <div class="content__news">
-            <div class="content__top-new top-new">
-                <div class="top-new__image">
-                    <img src="https://placehold.co/1090x400" alt="">
-                </div>
-                <div class="top-new__actions">
-                    <span class="top-new__title">
-                        Топ новина дня
-                    </span>
-                    <div class="show-btn">Переглянути</div>
-                </div>
+    <div class="content__news">
+      <div class="content__top-new top-new">
+        <div class="top-new__image">
+          <img src="https://placehold.co/1090x400" alt="" />
+        </div>
+        <div class="top-new__actions">
+          <span class="top-new__title"> Топ новина дня </span>
+          <div class="show-btn">Переглянути</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="content__title-header">
+        <h2 class="content__title">Новини</h2>
+        <span class="content__total-count">
+          (знайдено {{ totalCount }} публікацій)
+        </span>
+        <i
+          *ngIf="!isPageLoaded"
+          class="pi pi-spin pi-spinner"
+          style="font-size: 1rem"
+        ></i>
+      </div>
+      <div *ngIf="isDataLoaded" class="catalog">
+        <div
+          *ngFor="let article of articles"
+          (click)="showNewsDetails(article)"
+          class="catalog__item item"
+        >
+          <div class="item__image">
+            <img [src]="article.image" alt="" />
+            <div class="item__details">
+              <span class="item__title">{{ article.title }}</span>
             </div>
-            <div class="divider"></div>
-            <div class="content__title-header">
-                <h2 class="content__title">
-                    Новини
-                </h2>
-                <span class="content__total-count">
-                    (знайдено {{ totalCount }} публікацій)
+          </div>
+          <div class="item__details-data">
+            <div class="item__date-time">
+              <div class="item__types-list">
+                <span [class]="getArticleTypeClass(article.dataType)">
+                  {{ getArticleTypeName(article.dataType) }}
                 </span>
-                <i *ngIf="!isPageLoaded" class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+              </div>
+              <span>{{
+                parseStringToDate(article.date) | date : "dd.M.yyy"
+              }}</span>
+              <span>{{ article.time }}</span>
             </div>
-            <div *ngIf="isDataLoaded" class="catalog">
-                <div *ngFor="let article of articles" (click)="showNewsDetails(article)" class="catalog__item item">
-                    <div class="item__image">
-                        <img [src]="article.image" alt="">
-                        <div class="item__details">
-                            <span class="item__title">{{ article.title }}</span>
-                        </div>
-                    </div>
-                    <div class="item__details-data">
-                        <div class="item__date-time">
-                            <div class="item__types-list">
-                                <span [class]="getArticleTypeClass(article.dataType)">
-                                    {{ getArticleTypeName(article.dataType) }}
-                                </span>
-                            </div>        
-                            <span>{{ parseStringToDate(article.date) | date: 'dd.M.yyy' }}</span>
-                            <span>{{ article.time }}</span>
-                        </div>
-                        <span class="item__source-url">{{ article.source?.uri }}</span>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="isDataLoaded" class="paginator-container">
-                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalCount && 0" [rowsPerPageOptions]="[12, 24, 72]"></p-paginator>
-            </div>
-            <div *ngIf="!isDataLoaded" class="catalog__loader">
-                <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <!-- <div class="paginator-container">
+            <span class="item__source-url">{{ article.source?.uri }}</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isDataLoaded" class="paginator-container">
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [first]="first"
+          [rows]="rows"
+          [totalRecords]="totalCount && 0"
+          [rowsPerPageOptions]="[12, 24, 72]"
+        ></p-paginator>
+      </div>
+      <div *ngIf="!isDataLoaded" class="catalog__loader">
+        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      </div>
+      <!-- <div class="paginator-container">
                 <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalCount" [rowsPerPageOptions]="[12, 24, 72]"></p-paginator>
             </div> -->
-        </div>
     </div>
+  </div>
 </div>
