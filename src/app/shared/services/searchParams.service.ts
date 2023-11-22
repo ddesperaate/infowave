@@ -16,6 +16,8 @@ export class FiltersService {
     langs: ['ukr'],
     page: 1,
     articlesCount: 12,
+    dateStart: undefined,
+    dateEnd: undefined,
   });
   private routePrarms: RouteApiParams = new RouteApiParams();
 
@@ -48,4 +50,6 @@ export class RouteApiParams {
   langs!: string |  string[] | null;
   page!: number;
   articlesCount!: number;
+  dateStart!: string | undefined;
+  dateEnd!: string | undefined;
 }

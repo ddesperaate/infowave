@@ -19,8 +19,10 @@ export class GetNewsService {
   page: number = 1;
   articlesCount: number = 12;
   langs: string[] | string = ['ukr'];
+  dateStart: string | undefined;
+  dateEnd: string | undefined;
   urlExludes: string[] = [
-    'unn.ua',
+    // 'unn.ua',
     'nr2.com.ua',
     'day.kyiv.ua',
     'radioera.com.ua',
@@ -33,6 +35,7 @@ export class GetNewsService {
     'ng.ru',
     'rusjev.net',
     'ua.interfax.com.ua',
+    'nowyny.eu',
   ];
 
   constructor(
@@ -45,11 +48,13 @@ export class GetNewsService {
       console.log('?paramsChanged??');
       this.category = params.category;
       this.dataTypes = params.types;
-      this.searchString = params.searchString;
+      this.searchString = params.searchString ? params.searchString : '';
       this.sortByString = params.sortByString;
       this.langs = params.langs;
       this.page = params.page + 1;
       this.articlesCount = params.articlesCount;
+      this.dateStart = params.dateStart;
+      this.dateEnd = params.dateEnd;
     });
   }
 
@@ -68,6 +73,10 @@ export class GetNewsService {
       ignoreSourceUri: this.urlExludes,
       dataType: this.dataTypes,
       forceMaxDataTimeWindow: 31,
+      keywordOper: 'or',
+      isDuplicateFilter: 'skipDuplicates',
+      dateStart: this.dateStart,
+      dateEnd: this.dateEnd,
     };
 
     console.log(params, 'REQUESTED');

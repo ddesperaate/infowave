@@ -41,6 +41,10 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+
+            &--range {
+                justify-content: space-between;
+            }
         }
 
         &__values {

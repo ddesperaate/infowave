@@ -16,13 +16,20 @@ export class AsideComponent implements OnInit {
   langsList = AppConsts.lagsList;
   selectedLangs: any = [AppConsts.lagsList[0]];
 
+  isMobileDevice: boolean = true;
+
+  date: Date | undefined;
+  dateRange: Date[] | undefined;
+  isRangeActive: boolean = true;
+
+  maxDate: Date = new Date();
 
   constructor(
     private _filterService: FiltersService,
   ) {}
 
   ngOnInit(): void {
-    console.log(this.selectedCategories);
+    this.isMobileDevice = window.innerWidth < 1025;
     this._filterService.getParams().subscribe((params: RouteApiParams) => {
       // console.log(params);
       // this.selectedCategories = (params.category?.length) ? [...params.category] : [params.category];
@@ -35,7 +42,10 @@ export class AsideComponent implements OnInit {
     const params = new RouteApiParams();
     params.category = this.selectedCategories && this.selectedCategories.length ? this.getFiltersValues(this.selectedCategories) : this.resetAllCategories();
     params.types = this.selectedNewsTypes && this.selectedNewsTypes?.length ? this.getFiltersValues(this.selectedNewsTypes) : this.resetAllNewsTypes();
-    params.langs =this.selectedLangs && this.selectedLangs.length ? this.getFiltersValues(this.selectedLangs) : this.resetAllLangs();
+    params.langs = this.selectedLangs && this.selectedLangs.length ? this.getFiltersValues(this.selectedLangs) : this.resetAllLangs();
+    params.searchString = null;
+    params.dateStart = this.isRangeActive ? this.getDateForApiFormat(this.dateRange[0]) : this.getDateForApiFormat(this.date);
+    params.dateEnd = this.isRangeActive ? this.getDateForApiFormat(this.dateRange[1]) : undefined;
     this._filterService.setParams(params);
   }
 
@@ -45,6 +55,17 @@ export class AsideComponent implements OnInit {
       selectedNewsTypes: this.selectedNewsTypes,
       selectedLangs: this.selectedLangs,
     });
+  }
+
+  getDateForApiFormat(date: Date): string | undefined {
+    if (!date) return undefined;
+    let result: string = '';
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    result = `${year}-${month}-${day}`;
+    return result;
   }
 
   resetAllNewsTypes(): string {

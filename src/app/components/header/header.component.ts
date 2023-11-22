@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FiltersService } from 'src/app/shared/services/searchParams.service';
+import { Router } from '@angular/router';
+import { FiltersService, RouteApiParams } from 'src/app/shared/services/searchParams.service';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +11,11 @@ export class HeaderComponent implements OnInit {
   searchText: string = '';
   nowDate: Date = new Date();
 
-  // articlesSearchFieldTimer: NodeJS.Timeout;
+  articlesSearchFieldTimer;
 
   constructor(
     private _searchParamsService: FiltersService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +26,13 @@ export class HeaderComponent implements OnInit {
   }
 
   searchArticlesWithSearchWord(event): void {
-    // this.articlesSearchFieldTimer
+    clearTimeout(this.articlesSearchFieldTimer);
+    const params = new RouteApiParams();
+    params.searchString = event;
+    this.articlesSearchFieldTimer = setTimeout(()=> {
+      this.router.navigate(['/news'], { queryParams: { search: params.searchString }});
+      this._searchParamsService.setParams(params);
+    }, 600);
   }
 
 }

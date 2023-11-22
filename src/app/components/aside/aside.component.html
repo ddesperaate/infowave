@@ -1,5 +1,4 @@
 <aside (click)="showState()" class="aside">
-
     <div class="section">
         <div class="section__title">
             <i class="pi pi-book" style="font-size: 1rem"></i>
@@ -7,7 +6,8 @@
         </div>
         <div class="section__values">
             <div *ngFor="let category of categories" class="field-checkbox">
-                <p-checkbox name="group" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
+                <p-checkbox name="group" [value]="category" [(ngModel)]="selectedCategories"
+                    [inputId]="category.key"></p-checkbox>
                 <label [for]="category.key">{{ category.name }}</label>
             </div>
         </div>
@@ -20,7 +20,8 @@
         </div>
         <div class="section__values">
             <div *ngFor="let type of newsTypes" class="field-checkbox">
-                <p-checkbox name="group" [value]="type" [(ngModel)]="selectedNewsTypes" [inputId]="type.key"></p-checkbox>
+                <p-checkbox name="group" [value]="type" [(ngModel)]="selectedNewsTypes"
+                    [inputId]="type.key"></p-checkbox>
                 <label [for]="type.key">{{ type.name }}</label>
             </div>
         </div>
@@ -39,12 +40,26 @@
         </div>
     </div>
 
+    <div class="section">
+        <div class="section__title section__title--range">
+            <div class="section__title">
+                <i class="pi pi-calendar" style="font-size: 1rem"></i>
+                <span class="text">Дата публікацій</span>
+            </div>
+            <div class="section__title--side-selector">
+                <p-inputSwitch [(ngModel)]="isRangeActive"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="section__values">
+            <p-calendar *ngIf="!isRangeActive" [(ngModel)]="date" [maxDate]="maxDate" [showIcon]="true" [touchUI]="isMobileDevice"
+                [placeholder]="'Оберіть дату'"></p-calendar>
+            <p-calendar *ngIf="isRangeActive" [(ngModel)]="dateRange" [maxDate]="maxDate" [selectionMode]="'range'" [showIcon]="true"
+                [touchUI]="isMobileDevice" [placeholder]="'Оберіть період'"></p-calendar>
+        </div>
+    </div>
+
     <div (click)="findNews()" class="aside__find-btn">
         <i class="pi pi-search" style="color: #fff"></i>
         <span>Шукати</span>
     </div>
-
-
-
-
 </aside>

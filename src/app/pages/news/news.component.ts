@@ -22,7 +22,7 @@ export class NewsPageComponent implements OnInit {
   isPageLoaded: boolean = false;
   first: number = 0;
   rows: number = 12;
-  totalCount: number = 100;
+  totalCount: number;
   dialogRef: DynamicDialogRef | undefined;
   constructor(
     private _getNewsService: GetNewsService,
@@ -38,10 +38,10 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getStartNews();
+    // this.getStartNews();
     this._getNewsService.initListeners();
     this._filtersService.getParams().subscribe((params) => {
-      setTimeout(() => this.getStartNews(), 50);
+      this.getStartNews();
     });
   }
 

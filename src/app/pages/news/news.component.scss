@@ -88,6 +88,14 @@
             }
         }
 
+        &__total-count {
+            display: block;
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--gray500);
+            margin-left: 0.4rem;
+        }
+
         .catalog {
             max-width: 1090px;
             display: flex;
