@@ -22,7 +22,7 @@ export class NewsPageComponent implements OnInit {
   isPageLoaded: boolean = false;
   first: number = 0;
   rows: number = 12;
-  totalCount: number;
+  totalCount: number = 0;
   dialogRef: DynamicDialogRef | undefined;
   constructor(
     private _getNewsService: GetNewsService,
