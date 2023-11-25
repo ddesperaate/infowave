@@ -45,7 +45,6 @@ export class GetNewsService {
 
   initListeners(): void {
     this._filtersService.getParams().subscribe((params) => {
-      console.log('----====paramsChanged====----');
       this.category = params.category;
       this.dataTypes = params.types;
       this.searchString = params.searchString ? params.searchString : '';
