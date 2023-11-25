@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { AppSharedModule } from 'src/app/shared/app-shared.module';
-import { AboutUsComponent } from './about-us.component';
+import { ContactsComponent } from './contacts.component';
 
 @NgModule({
-    declarations: [AboutUsComponent],
-    exports: [AboutUsComponent],
+    declarations: [ContactsComponent],
+    exports: [ContactsComponent],
     imports: [AppSharedModule],
 })
 export class ContactsComponentModule {}
