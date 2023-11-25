@@ -28,6 +28,14 @@ export class FiltersService {
 
   }
 
+  initRouteListener(): void {
+    this.route.queryParams.subscribe((p: RouteApiParams) => {
+      const newParams = new RouteApiParams();
+      if (p.category) newParams.category = typeof p.category === 'string' ? [p.category] : p.category;
+      this.setParams(newParams);
+    })
+  }
+
   setRoureParams(): void {
     this.router.navigate(['/news'], { queryParams: this.params.value })
   }
@@ -44,7 +52,7 @@ export class FiltersService {
 
 export class RouteApiParams {
   searchString!: string | null;
-  category!: string | string[] | null;
+  category!: string[];
   types!: string | string[] | undefined
   sortByString!: string | null;
   langs!: string |  string[] | null;

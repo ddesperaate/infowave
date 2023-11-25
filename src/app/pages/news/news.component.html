@@ -16,6 +16,11 @@
         </div>
       </div>
       <div class="divider"></div>
+      <div (click)="sideFilters = true" class="content__mobile-filters-btn">
+        <i class="pi pi-filter" style="color: #fff;"></i>
+        Фільтри
+      </div>
+      <div class="divider divider--mobile"></div>
       <div class="content__title-header">
         <h2 class="content__title">Новини</h2>
         <span class="content__total-count">
@@ -73,3 +78,8 @@
     </div>
   </div>
 </div>
+
+<p-sidebar [(visible)]="sideFilters" [className]="'news__aside-filters-bar'">
+  <h3>Фільтри</h3>
+  <app-aside-component (mobileAsideClose)="sideFilters = false"> </app-aside-component>
+</p-sidebar>

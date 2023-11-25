@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppConsts } from 'src/app/shared/AppConsts';
 import { FiltersService, RouteApiParams } from 'src/app/shared/services/searchParams.service';
 
@@ -8,7 +9,9 @@ import { FiltersService, RouteApiParams } from 'src/app/shared/services/searchPa
   styleUrls: ['./aside.component.scss']
 })
 export class AsideComponent implements OnInit {
-  
+
+  @Output() mobileAsideClose: EventEmitter<any> = new EventEmitter();
+
   categories = AppConsts.newsCategoriesList;
   selectedCategories: any = AppConsts.newsCategoriesList;
   newsTypes = AppConsts.newsTypes;
@@ -26,15 +29,19 @@ export class AsideComponent implements OnInit {
 
   constructor(
     private _filterService: FiltersService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.isMobileDevice = window.innerWidth < 1025;
     this._filterService.getParams().subscribe((params: RouteApiParams) => {
-      // console.log(params);
-      // this.selectedCategories = (params.category?.length) ? [...params.category] : [params.category];
-      // this.selectedNewsTypes = params.types?.length ? [...params.types] : [params.types];
-      // this.selectedLangs = params.langs?.length ? [...params.langs] : [params.langs];
+      if ((params.category && params.category?.length)) {
+        this.selectedCategories = [];
+        params.category.forEach(c => {
+          const cat = this.categories.find(nativeCategory => nativeCategory.key === c);
+          if (cat) this.selectedCategories.push(cat);
+        });
+      };
     });
   }
 
@@ -44,9 +51,13 @@ export class AsideComponent implements OnInit {
     params.types = this.selectedNewsTypes && this.selectedNewsTypes?.length ? this.getFiltersValues(this.selectedNewsTypes) : this.resetAllNewsTypes();
     params.langs = this.selectedLangs && this.selectedLangs.length ? this.getFiltersValues(this.selectedLangs) : this.resetAllLangs();
     params.searchString = null;
-    params.dateStart = this.isRangeActive ? this.getDateForApiFormat(this.dateRange[0]) : this.getDateForApiFormat(this.date);
-    params.dateEnd = this.isRangeActive ? this.getDateForApiFormat(this.dateRange[1]) : undefined;
+    params.dateStart = this.isRangeActive && this.dateRange && this.dateRange[0] ? this.getDateForApiFormat(this.dateRange[0]) : this.getDateForApiFormat(this.date);
+    params.dateEnd = this.isRangeActive && this.dateRange && this.dateRange[1] ? this.getDateForApiFormat(this.dateRange[1]) : undefined;
+    this.router.navigate([], {
+      queryParams: {},
+    })
     this._filterService.setParams(params);
+    this.mobileAsideClose.emit();
   }
 
   showState(): void {
@@ -78,13 +89,12 @@ export class AsideComponent implements OnInit {
     return '';
   }
 
-  resetAllCategories(): string {
+  resetAllCategories(): string[] {
     this.selectedCategories = AppConsts.newsCategoriesList;
-    return '';
+    return this.selectedCategories;
   }
 
   getFiltersValues(categories): string[] {
     return categories.map(c => c.key);
   }
-
 }

@@ -45,7 +45,7 @@ export class GetNewsService {
 
   initListeners(): void {
     this._filtersService.getParams().subscribe((params) => {
-      console.log('?paramsChanged??');
+      console.log('----====paramsChanged====----');
       this.category = params.category;
       this.dataTypes = params.types;
       this.searchString = params.searchString ? params.searchString : '';
@@ -80,7 +80,7 @@ export class GetNewsService {
     };
 
     console.log(params, 'REQUESTED');
-    // return new Observable();
+    return new Observable();
 
     return this.http
       .post(this.API_URL, params)
@@ -98,7 +98,7 @@ export class GetNewsService {
       includeArticleCategories: true,
     };
 
-    // return new Observable();
+    return new Observable();
 
     return this.http
       .post(this.API_URL_DETAILS, params)

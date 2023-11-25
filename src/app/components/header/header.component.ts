@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { AppConsts } from 'src/app/shared/AppConsts';
 import { FiltersService, RouteApiParams } from 'src/app/shared/services/searchParams.service';
 
 @Component({
@@ -12,27 +14,99 @@ export class HeaderComponent implements OnInit {
   nowDate: Date = new Date();
 
   articlesSearchFieldTimer;
+  newsSectionsOptions;
+  selectedNewsSection;
 
+  sidebarVisible: boolean = false;
+
+  asideMenuItems: MenuItem[];
   constructor(
-    private _searchParamsService: FiltersService,
+    private _filterService: FiltersService,
     private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.getNewSections();
 
-    setInterval(()=> {
-      this.nowDate = new Date();
-    }, 60000)
+    setInterval(() => this.nowDate = new Date(), 5000);
+
+    this._filterService.getParams().subscribe((params: RouteApiParams) => {
+      if ((typeof params.category === 'string')) {
+        console.log(typeof params.category);
+        this.selectedNewsSection = {};
+        const cat = this.newsSectionsOptions.find(nativeCategory => nativeCategory.key === params.category);
+        if (cat) this.selectedNewsSection = { ...cat };
+      };
+    });
+
+    this.asideMenuItems = [
+      {
+        label: 'Головна',
+        icon: 'pi pi-fw pi-home',
+        url: './home',
+        target: '',
+      },
+      {
+        label: 'Новини',
+        icon: 'pi pi-fw pi-megaphone',
+        url: './news',
+        target: '',
+      },
+      {
+        label: 'Рубрики',
+        icon: 'pi pi-fw pi-server',
+        items: this.getNewsCategoriesSideMenuItems(),
+      },
+      {
+        label: 'Про нас',
+        icon: 'pi pi-fw pi-id-card',
+        url: './about-us',
+        target: '',
+      },
+      {
+        label: 'Контакти',
+        icon: 'pi pi-fw pi-phone',
+        url: './contacts',
+        target: '',
+      }
+    ];
+  }
+
+  getNewSections(): void {
+    this.newsSectionsOptions = AppConsts.newsCategoriesList;
   }
 
   searchArticlesWithSearchWord(event): void {
     clearTimeout(this.articlesSearchFieldTimer);
     const params = new RouteApiParams();
     params.searchString = event;
-    this.articlesSearchFieldTimer = setTimeout(()=> {
-      this.router.navigate(['/news'], { queryParams: { search: params.searchString }});
-      this._searchParamsService.setParams(params);
+    this.articlesSearchFieldTimer = setTimeout(() => {
+      this.router.navigate(['/news'], { queryParams: { search: params.searchString } });
+      this._filterService.setParams(params);
     }, 600);
+  }
+
+  showNewsOfSelectedCategory(item?): void {
+    const params = new RouteApiParams();
+    if (item) this.selectedNewsSection = item;
+    params.category = [item.key || this.selectedNewsSection.key];
+    this.router.navigate(['/news'], { queryParams: { category: params.category } });
+    this._filterService.setParams(params);
+    this.sidebarVisible = false;
+  }
+
+  getNewsCategoriesSideMenuItems(): MenuItem[] {
+    const MenuItems: MenuItem[] = AppConsts.newsCategoriesList.map(i => {
+      return {
+        label: i.name,
+        icon: i.icon,
+        key: i.key,
+        command: () => this.showNewsOfSelectedCategory(i),
+      };
+    });
+
+    return MenuItems;
   }
 
 }

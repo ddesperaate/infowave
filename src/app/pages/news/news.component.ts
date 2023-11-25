@@ -22,8 +22,10 @@ export class NewsPageComponent implements OnInit {
   isPageLoaded: boolean = false;
   first: number = 0;
   rows: number = 12;
-  totalCount: number = 200;
+  totalCount: number = 0;
   dialogRef: DynamicDialogRef | undefined;
+
+  sideFilters: boolean = false;
   constructor(
     private _getNewsService: GetNewsService,
     private _newsDetailsService: NewsDetailsService,
@@ -47,6 +49,7 @@ export class NewsPageComponent implements OnInit {
 
   getStartNews() {
     this.isPageLoaded = false;
+    this.totalCount = 0;
     this._getNewsService.getArticles().subscribe((res) => {
       if (res?.error) {
         console.log(res);

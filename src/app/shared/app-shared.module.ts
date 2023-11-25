@@ -19,6 +19,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChipModule } from 'primeng/chip';
 import { MessagesModule } from 'primeng/messages';
+import { SidebarModule } from 'primeng/sidebar';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 
 const imports = [
@@ -43,6 +45,8 @@ const imports = [
     DynamicDialogModule,
     ChipModule,
     MessagesModule,
+    SidebarModule,
+    PanelMenuModule
 ];
 
 @NgModule({

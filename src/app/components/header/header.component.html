@@ -12,14 +12,25 @@
             <li>
                 <a [routerLink]="'/news'">Новини</a>
             </li>
-            <li>
-                <a [routerLink]="'/'">Рубрики</a>
+            <li class="li-dd">
+                <p-dropdown (onChange)="showNewsOfSelectedCategory()" [options]="newsSectionsOptions" [(ngModel)]="selectedNewsSection" optionLabel="name" placeholder="Рубрики">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2" *ngIf="selectedNewsSection">
+                            <div>{{ selectedNewsSection.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-option pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <span>{{ option.name }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
             </li>
             <li>
-                <a [routerLink]="'/'">Про нас</a>
+                <a [routerLink]="'/about-us'">Про нас</a>
             </li>
             <li>
-                <a [routerLink]="'/'">Контакти</a>
+                <a [routerLink]="'/contacts'">Контакти</a>
             </li>
         </ul>
 
@@ -35,9 +46,21 @@
                 <i class="pi pi-search" style="color: #fff"></i>
             </div>
         </div>
-    </div>
-    <div class="header__time-data">
-        <span>{{ nowDate | date: 'h:mm' }}</span>
-        <span><b>{{ nowDate | date: 'dd.M.yyy' }}</b></span>
+        <div class="header__time-data">
+            <span>{{ nowDate | date: 'h:mm' }}</span>
+            <span><b>{{ nowDate | date: 'dd.M.yyy' }}</b></span>
+        </div>
+        <div class="header__mobile-menu">
+            <p-button (click)="sidebarVisible = true" icon="pi pi-th-large"></p-button>
+        </div>
     </div>
 </header>
+
+<p-sidebar [(visible)]="sidebarVisible">
+    <h3>Меню портала</h3>
+    <div class="side-menu">
+        <div class="card flex justify-content-center">
+            <p-panelMenu [model]="asideMenuItems" [style]="{'width':'100%'}"></p-panelMenu>
+        </div>
+    </div>
+</p-sidebar>

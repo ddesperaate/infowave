@@ -32,6 +32,10 @@
         border-radius: var(--main-br);
         padding: 1rem;
 
+        @media(max-width: 1280px) {
+            margin-left: 0;
+        }
+
         &__news {
             display: flex;
             flex-direction: column;
@@ -46,18 +50,29 @@
             height: auto;
             overflow: hidden;
 
+            @media(max-width: 1280px) {
+                height: 30vh;
+            }
+
             &:hover .top-new__image img {
                 transform: scale(1.1);
             }
 
             &__image {
                 display: block;
+                width: 100%;
+                height: 100%;
 
                 & img {
                     display: block;
                     width: 100%;
                     height: auto;
                     transition: transform .5s;
+
+                    @media(max-width: 1280px) {
+                        object-fit: cover;
+                        height: 100%;
+                    }
                 }
             }
 
@@ -76,6 +91,24 @@
                 display: block;
                 font-size: 2rem;
                 font-weight: 700;
+            }
+        }
+
+        &__mobile-filters-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 10px 1rem;
+            color: #fff;
+            font-weight: 700;
+            background-color: var(--primary);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+    
+            &:hover {
+                background-color: var(--hover-color);
             }
         }
 

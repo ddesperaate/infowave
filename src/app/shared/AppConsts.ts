@@ -5,12 +5,12 @@ export class AppConsts {
     static readonly API_KEY = 'c31b04f5-f6dd-42de-8549-7aa8bde87056';
 
     static readonly newsCategoriesList: any[] = [
-        { name: 'Наука', key: 'news/Science' },
-        { name: 'Здоров\'я', key: 'news/Health' },
-        { name: 'Мистецтво', key: 'news/Arts_and_Entertainmen' },
-        { name: 'Політика', key: 'news/Politics' },
-        { name: 'Бізнес', key: 'news/Business' },
-        { name: 'Спорт', key: 'news/Sports' },
+        { name: 'Наука', key: 'news/Science', icon: 'pi pi-fw pi-book' },
+        { name: 'Здоров\'я', key: 'news/Health', icon: 'pi pi-fw pi-book' },
+        { name: 'Мистецтво', key: 'news/Arts_and_Entertainmen', icon: 'pi pi-fw pi-book' },
+        { name: 'Політика', key: 'news/Politics', icon: 'pi pi-fw pi-book' },
+        { name: 'Бізнес', key: 'news/Business', icon: 'pi pi-fw pi-book' },
+        { name: 'Спорт', key: 'news/Sports', icon: 'pi pi-fw pi-book' },
         // { name: 'Environment', key: 'news/Environment' },
     ];
 
