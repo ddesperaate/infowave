@@ -44,13 +44,13 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Головна',
         icon: 'pi pi-fw pi-home',
-        url: './home',
+        command: () => this.asideNavigate('./home'),
         target: '',
       },
       {
         label: 'Новини',
         icon: 'pi pi-fw pi-megaphone',
-        url: './news',
+        command: () => this.asideNavigate('./news'),
         target: '',
       },
       {
@@ -61,13 +61,13 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Про нас',
         icon: 'pi pi-fw pi-id-card',
-        url: './about-us',
+        command: () => this.asideNavigate('./about-us'),
         target: '',
       },
       {
         label: 'Контакти',
         icon: 'pi pi-fw pi-phone',
-        url: './contacts',
+        command: () => this.asideNavigate('./contacts'),
         target: '',
       }
     ];
@@ -107,6 +107,11 @@ export class HeaderComponent implements OnInit {
     });
 
     return MenuItems;
+  }
+
+  asideNavigate(url): void {
+    this.router.navigate([url], { queryParams: { } });
+    this.sidebarVisible = false;
   }
 
 }
