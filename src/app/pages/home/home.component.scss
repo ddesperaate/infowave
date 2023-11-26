@@ -129,7 +129,7 @@
 
     .about-us {
         display: block;
-        min-height: 100vh;
+        height: 100vh;
         color: #fff;
 
         &__content-wrap {
@@ -141,7 +141,7 @@
             background-color: var(--primary);
 
             @media(max-width: 1280px) {
-                height: unset;
+                // height: unset;
             }
         }
 
@@ -165,12 +165,12 @@
                 }
 
                 & img {
-                    height: auto;
+                    max-height: 50%;
                     max-width: 40%;
                     border-radius: 1rem;
 
                     @media(max-width: 1280px) {
-                        max-width: 95%;
+                        max-width: 50%;
                     }
                 }
 
