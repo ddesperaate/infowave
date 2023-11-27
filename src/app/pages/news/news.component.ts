@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { Message, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GetNewsService } from 'src/app/api/getNews.service';
 import { NewsDetailsComponent } from 'src/app/components/news-details/news-details.component';
@@ -18,8 +19,9 @@ import {
 export class NewsPageComponent implements OnInit {
   searchText: string = '';
   articles: NewsArticle[] = [];
-  isDataLoaded: boolean = false;
+  mainArticle: NewsArticle;
   isPageLoaded: boolean = false;
+  messages: Message[] | undefined;
   first: number = 0;
   rows: number = 12;
   totalCount: number = 0;
@@ -30,6 +32,7 @@ export class NewsPageComponent implements OnInit {
     private _getNewsService: GetNewsService,
     private _newsDetailsService: NewsDetailsService,
     private _filtersService: FiltersService,
+    private router: Router,
     public dialogService: DialogService,
     public messageService: MessageService
   ) {}
@@ -45,30 +48,39 @@ export class NewsPageComponent implements OnInit {
     this._filtersService.getParams().subscribe((params) => {
       this.getStartNews();
     });
+    this.getMainNews();
   }
 
   getStartNews() {
     this.isPageLoaded = false;
     this.totalCount = 0;
+    this.articles = [];
     this._getNewsService.getArticles().subscribe((res) => {
       if (res?.error) {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Сталася помилка',
-          detail: res?.error,
-        });
+        this.messages = [{ severity: 'error', summary: 'Упс!', detail: 'На стороні API сталася проблема. Перенаправлення на головну через 5 секунд.' }];
+        setTimeout(() => this.router.navigate(['/home']), 5500);
         return;
       }
-      console.log(res, '===============');
       this.totalCount = res.articles.totalResults;
       this.articles = res.articles.results;
-      this.isDataLoaded = true;
-      this.isPageLoaded = true;
-      // setTimeout(()=> this.isDataLoaded = true, 1000);
+      setTimeout(()=> this.isPageLoaded = true, 800);
     });
   }
 
+  getMainNews(): void {
+    this._getNewsService.getMainArticle().subscribe(res => {
+      if (res?.error) {
+        this.messages = [{ severity: 'error', summary: 'Упс!', detail: 'На стороні API сталася проблема. Перенаправлення на головну через 5 секунд.' }];
+        setTimeout(() => this.router.navigate(['/home']), 5500);
+        return;
+      }
+      this.mainArticle = res.articles.results;
+      console.log(this.mainArticle);
+    })
+  }
+
   onPageChange(event: PageEvent) {
+    console.log(event.page);
     this.first = event.first;
     this.rows = event.rows;
     const params = new RouteApiParams();
@@ -139,6 +151,12 @@ export class NewsPageComponent implements OnInit {
     const parsedDate = new Date(year, month, day);
 
     return parsedDate;
+  }
+
+  handleImageError(event) {
+    const parentElement = event.target.parentElement;
+    parentElement.classList.add('image-with-error');
+    event.target.src = 'assets/images/news/news-default.png';
   }
 }
 

@@ -22,11 +22,6 @@ export class GetNewsService {
   dateStart: string | undefined;
   dateEnd: string | undefined;
   urlExludes: string[] = [
-    // 'unn.ua',
-    'nr2.com.ua',
-    'day.kyiv.ua',
-    'radioera.com.ua',
-    'portal.lviv.ua',
     'mk-mari.ru',
     'rg.ru',
     'altapress.ru',
@@ -34,7 +29,7 @@ export class GetNewsService {
     'pnp.ru',
     'ng.ru',
     'rusjev.net',
-    'ua.interfax.com.ua',
+    // 'ua.interfax.com.ua',
     'nowyny.eu',
   ];
 
@@ -73,6 +68,7 @@ export class GetNewsService {
       dataType: this.dataTypes,
       forceMaxDataTimeWindow: 31,
       keywordOper: 'or',
+      keywordLoc: 'body,title',
       isDuplicateFilter: 'skipDuplicates',
       dateStart: this.dateStart,
       dateEnd: this.dateEnd,
@@ -80,6 +76,30 @@ export class GetNewsService {
 
     console.log(params, 'REQUESTED');
     // return new Observable();
+
+    return this.http
+      .post(this.API_URL, params)
+      .pipe(catchError(this.handleError));
+  }
+
+  getMainArticle(): Observable<any> {
+    const params = {
+      action: 'getArticles',
+      categoryUri: 'news/Science',
+      articlesPage: 1,
+      articlesCount: 1,
+      articlesSortBy: 'socialScore',
+      lang: 'ukr',
+      articlesSortByAsc: false,
+      resultType: 'articles',
+      apiKey: this.API_KEY,
+      ignoreSourceUri: this.urlExludes,
+      forceMaxDataTimeWindow: 31,
+      keywordOper: 'or',
+      isDuplicateFilter: 'skipDuplicates',
+      startSourceRankPercentile: 90,
+      endSourceRankPercentile: 100,
+    };
 
     return this.http
       .post(this.API_URL, params)

@@ -21,6 +21,12 @@
             // flex-direction: column;
             font-size: 1.2rem;
         }
+        a {
+            color: var(--primary);
+            &:visited {
+                color: var(--primary);
+            }
+        }
     }
 
     & .links-list {

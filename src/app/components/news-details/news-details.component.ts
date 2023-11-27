@@ -40,4 +40,10 @@ export class NewsDetailsComponent implements OnInit {
   getCategoryName(label): string {
     return AppConsts.newsCategoriesList.find((c) => c.key === label).name;
   }
+
+  handleImageError(event) {
+    const parentElement = event.target.parentElement;
+    parentElement.classList.add('image-with-error');
+    event.target.src = 'assets/images/news/news-default.png';
+  }
 }

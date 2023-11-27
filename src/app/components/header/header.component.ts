@@ -77,14 +77,15 @@ export class HeaderComponent implements OnInit {
     this.newsSectionsOptions = AppConsts.newsCategoriesList;
   }
 
-  searchArticlesWithSearchWord(event): void {
+  searchArticlesWithSearchWord(event: string): void {
     clearTimeout(this.articlesSearchFieldTimer);
+    const targetString = event ? event.split('\'').join().split('"').join().split(':').join() : '';
     const params = new RouteApiParams();
     params.searchString = event;
     this.articlesSearchFieldTimer = setTimeout(() => {
       this.router.navigate(['/news'], { queryParams: { search: params.searchString } });
       this._filterService.setParams(params);
-    }, 600);
+    }, 1000);
   }
 
   showNewsOfSelectedCategory(item?): void {

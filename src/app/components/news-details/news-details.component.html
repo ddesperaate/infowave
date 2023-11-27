@@ -6,7 +6,9 @@
                 <span class="url">{{ newsDetail.source.uri + ' ' +  newsDetail.date + ' ' + newsDetail.time}}</span>
             </a>
             <div class="top-section__image">
-                <img [src]="newsDetail.image" [alt]="newsDetail.source.title">
+                <img [src]="newsDetail.image" (error)="handleImageError($event)" [alt]="newsDetail.source.title">
+                <span class="image-error-text">ЗОБРАЖЕННЯ ВІДСУТНЄ</span>
+                <span class="image-error-text">ДЖЕРЕЛО ЗАБОРОНЯЄ ВИКОРИСТАННЯ НА СТОРОННІХ РЕСУРСАХ</span>
             </div>
             <div class="top-section__authors">
                 <span class="author">Автори:</span> 
@@ -30,6 +32,7 @@
             <p-chip *ngFor="let cat of newsDetail.categories" [label]="getCategoryName(cat.label)"></p-chip>
         </div>
         <div class="details__footer">
+            <a [href]="newsDetail.url" target="_blank" class="return-btn">Переглянути джерело</a>
             <div (click)="simulateEscapeKey()" class="return-btn">Повернутися до інших новин</div>
         </div>
     </div>
