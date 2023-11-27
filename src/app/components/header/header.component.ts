@@ -88,9 +88,10 @@ export class HeaderComponent implements OnInit {
   }
 
   showNewsOfSelectedCategory(item?): void {
+    console.log(item);
     const params = new RouteApiParams();
     if (item) this.selectedNewsSection = item;
-    params.category = [item.key || this.selectedNewsSection.key];
+    params.category = [item?.key || this.selectedNewsSection.key];
     this.router.navigate(['/news'], { queryParams: { category: params.category } });
     this._filterService.setParams(params);
     this.sidebarVisible = false;

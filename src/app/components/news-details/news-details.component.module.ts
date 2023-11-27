@@ -7,6 +7,6 @@ import { NewsDetailsComponent } from './news-details.component';
 @NgModule({
   declarations: [NewsDetailsComponent],
   exports: [NewsDetailsComponent],
-  imports: [AppSharedModule ],
+  imports: [AppSharedModule],
 })
 export class NewsDetailsComponentModule {}

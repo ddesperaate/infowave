@@ -52,7 +52,6 @@ export class NewsPageComponent implements OnInit {
     this.totalCount = 0;
     this._getNewsService.getArticles().subscribe((res) => {
       if (res?.error) {
-        console.log(res);
         this.messageService.add({
           severity: 'error',
           summary: 'Сталася помилка',

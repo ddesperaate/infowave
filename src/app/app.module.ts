@@ -11,6 +11,8 @@ import { FooterComponentModule } from './components/footer/footer.component.modu
 import { NewsPageComponentModule } from './pages/news/news.component.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; 
+import { AboutUsComponentModule } from './pages/about-us/about-us.component.module';
+import { ContactsComponentModule } from './pages/contacts/contacts.component.module';
 // import { AsideComponentModule } from './components/aside/aside.component.module';
 
 
@@ -27,6 +29,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponentModule,
     FooterComponentModule,
     NewsPageComponentModule,
+    AboutUsComponentModule,
+    ContactsComponentModule,
     HttpClientModule,
     
   ],

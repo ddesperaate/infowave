@@ -2,22 +2,21 @@
 <footer class="footer">
     <div class="footer__links">
         <div class="footer__links-list links-list">
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
+            <span class="links-list__header">Розділи новин</span>
+            <a [routerLink]="['/news']" [queryParams]="{category: 'news/Science'}" class="links-list__item">Наука'я</a>
+            <a [routerLink]="['/news']" [queryParams]="{category: 'news/Health'}" class="links-list__item">Здоров'я</a>
+            <a [routerLink]="['/news']" [queryParams]="{category: 'news/Arts_and_Entertainmen'}" class="links-list__item">Мистецтво</a>
+            <a [routerLink]="['/news']" [queryParams]="{category: 'news/Politics'}" class="links-list__item">Політика</a>
+            <a [routerLink]="['/news']" [queryParams]="{category: 'news/Business'}" class="links-list__item">Бізнес</a>
+            <a [routerLink]="['/news']" [queryParams]="{category: 'news/Sports'}" class="links-list__item">Спорт</a>
         </div>
         <div class="footer__links-list links-list">
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-        </div>
-        <div class="footer__links-list links-list">
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
-            <a [routerLink]="'/'" class="links-list__item">Footer Link example</a>
+            <span class="links-list__header">Мапа порталу</span>
+            <a [routerLink]="'/'" class="links-list__item">Головна</a>
+            <a [routerLink]="'/news'" class="links-list__item">Новини</a>
+            <a [routerLink]="'/about-us'" class="links-list__item">Про нас</a>
+            <a [routerLink]="'/contacts'" class="links-list__item">Контакти</a>
+            <a [routerLink]="'/contacts'" class="links-list__item">Соціальні мережі</a>
         </div>
     </div>
 

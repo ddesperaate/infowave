@@ -99,7 +99,7 @@
         }
 
         &__mobile-filters-btn {
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             gap: 1rem;
@@ -110,6 +110,10 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+
+            @media(max-width: 1280px) {
+                display: flex;
+            }
     
             &:hover {
                 background-color: var(--hover-color);

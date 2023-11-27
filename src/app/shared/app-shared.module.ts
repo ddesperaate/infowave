@@ -21,6 +21,7 @@ import { ChipModule } from 'primeng/chip';
 import { MessagesModule } from 'primeng/messages';
 import { SidebarModule } from 'primeng/sidebar';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { AccordionModule } from 'primeng/accordion';
 
 
 const imports = [
@@ -46,7 +47,8 @@ const imports = [
     ChipModule,
     MessagesModule,
     SidebarModule,
-    PanelMenuModule
+    PanelMenuModule,
+    AccordionModule
 ];
 
 @NgModule({
