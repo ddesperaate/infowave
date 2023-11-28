@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit {
 
     this._filterService.getParams().subscribe((params: RouteApiParams) => {
       if ((typeof params.category === 'string')) {
-        console.log(typeof params.category);
         this.selectedNewsSection = {};
         const cat = this.newsSectionsOptions.find(nativeCategory => nativeCategory.key === params.category);
         if (cat) this.selectedNewsSection = { ...cat };
@@ -89,7 +88,6 @@ export class HeaderComponent implements OnInit {
   }
 
   showNewsOfSelectedCategory(item?): void {
-    console.log(item);
     const params = new RouteApiParams();
     if (item) this.selectedNewsSection = item;
     params.category = [item?.key || this.selectedNewsSection.key];

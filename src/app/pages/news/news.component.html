@@ -6,18 +6,29 @@
     </div>
 
     <div class="content__news">
-      <div class="content__top-new top-new">
+      <div
+        class="content__top-new top-new"
+        (click)="showNewsDetails(mainArticle)"
+      >
         <div class="top-new__image">
-          <img src="https://placehold.co/1090x400" alt="" />
+          <img
+            [src]="mainArticle.image"
+            (error)="handleImageError($event)"
+            alt=""
+          />
         </div>
         <div class="top-new__actions">
-          <span class="top-new__title"> Топ новина дня </span>
+          <div class="top-new__actions-data">
+            <span class="top-new__title"> Топ новина дня </span>
+            <span class="top-new__news-title">{{ mainArticle.title }}</span>
+          </div>
+
           <div class="show-btn">Переглянути</div>
         </div>
       </div>
       <div class="divider"></div>
       <div (click)="sideFilters = true" class="content__mobile-filters-btn">
-        <i class="pi pi-filter" style="color: #fff;"></i>
+        <i class="pi pi-filter" style="color: #fff"></i>
         Фільтри
       </div>
       <div class="divider divider--mobile"></div>
@@ -32,7 +43,11 @@
           style="font-size: 1rem"
         ></i>
       </div>
-      <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+      <p-messages
+        [(value)]="messages"
+        [enableService]="false"
+        [closable]="false"
+      ></p-messages>
       <div *ngIf="isPageLoaded" class="catalog">
         <div
           *ngFor="let article of articles"
@@ -40,7 +55,11 @@
           class="catalog__item item"
         >
           <div class="item__image">
-            <img [src]="article.image" (error)="handleImageError($event)" alt="" />
+            <img
+              [src]="article.image"
+              (error)="handleImageError($event)"
+              alt=""
+            />
             <span class="image-error-text">ЗОБРАЖЕННЯ ВІДСУТНЄ</span>
             <div class="item__details">
               <span class="item__title">{{ article.title }}</span>
@@ -54,9 +73,9 @@
                 </span>
               </div>
               <span>{{
-                parseStringToDate(article.date) | date : "dd.M.yyy"
+                parseStringToDate(article.date) | date : "dd.M.yy"
               }}</span>
-              <span>{{ article.time }}</span>
+              <span>{{ article.time.substr(0, 5) }}</span>
             </div>
             <span class="item__source-url">{{ article.source?.uri }}</span>
           </div>
@@ -83,5 +102,6 @@
 
 <p-sidebar [(visible)]="sideFilters" [className]="'news__aside-filters-bar'">
   <h3>Фільтри</h3>
-  <app-aside-component (mobileAsideClose)="sideFilters = false"> </app-aside-component>
+  <app-aside-component (mobileAsideClose)="sideFilters = false">
+  </app-aside-component>
 </p-sidebar>

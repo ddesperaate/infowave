@@ -19,7 +19,7 @@ import {
 export class NewsPageComponent implements OnInit {
   searchText: string = '';
   articles: NewsArticle[] = [];
-  mainArticle: NewsArticle;
+  mainArticle: NewsArticle = new NewsArticle();
   isPageLoaded: boolean = false;
   messages: Message[] | undefined;
   first: number = 0;
@@ -74,17 +74,15 @@ export class NewsPageComponent implements OnInit {
         setTimeout(() => this.router.navigate(['/home']), 5500);
         return;
       }
-      this.mainArticle = res.articles.results;
-      console.log(this.mainArticle);
+      this.mainArticle = res.articles.results[0];
     })
   }
 
   onPageChange(event: PageEvent) {
-    console.log(event.page);
     this.first = event.first;
     this.rows = event.rows;
     const params = new RouteApiParams();
-    params.page = event.page;
+    params.page = event.page + 1;
     params.articlesCount = event.rows;
     this._filtersService.setParams(params);
     window.scroll({

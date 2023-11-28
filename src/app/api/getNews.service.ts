@@ -45,7 +45,7 @@ export class GetNewsService {
       this.searchString = params.searchString ? params.searchString : '';
       this.sortByString = params.sortByString;
       this.langs = params.langs;
-      this.page = params.page + 1;
+      this.page = params.page;
       this.articlesCount = params.articlesCount;
       this.dateStart = params.dateStart;
       this.dateEnd = params.dateEnd;
@@ -74,26 +74,25 @@ export class GetNewsService {
       dateEnd: this.dateEnd,
     };
 
-    console.log(params, 'REQUESTED');
+    // console.log(params, 'REQUESTED');
     // return new Observable();
 
     return this.http
       .post(this.API_URL, params)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getMainArticle(): Observable<any> {
     const params = {
       action: 'getArticles',
-      categoryUri: 'news/Science',
+      categoryUri: ['news/Health', 'news/Science', 'news/Politics'],
       articlesPage: 1,
       articlesCount: 1,
       articlesSortBy: 'socialScore',
-      lang: 'ukr',
+      lang: ['ukr', 'rus'],
       articlesSortByAsc: false,
       resultType: 'articles',
       apiKey: this.API_KEY,
-      ignoreSourceUri: this.urlExludes,
       forceMaxDataTimeWindow: 31,
       keywordOper: 'or',
       isDuplicateFilter: 'skipDuplicates',
@@ -103,7 +102,7 @@ export class GetNewsService {
 
     return this.http
       .post(this.API_URL, params)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getArticleDetails(uri): Observable<any> {
@@ -117,19 +116,19 @@ export class GetNewsService {
       includeArticleCategories: true,
     };
 
-    // return new Observable();
-
     return this.http
       .post(this.API_URL_DETAILS, params)
-      .pipe(retry(1), catchError(this.handleError));
+      .pipe(retry(1));
   }
 
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
+      
       // Get client-side error
       errorMessage = error.error.message;
     } else {
+      
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
