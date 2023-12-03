@@ -14,7 +14,13 @@
                 align-items: center;
                 justify-content: flex-start;
                 font-size: 1rem;
+                color: var(--primary);
                 padding: 0 0 1rem;
+                text-decoration: none;
+
+                &:visited {
+                    color: var(--primary);
+                }
                 
                 .title {
                     color: var(--red800);
@@ -84,7 +90,13 @@
                 padding: 0.5rem 0 1rem;
 
                 .author-name {
+                    color: var(--primary);
                     font-weight: 600;
+                    text-decoration: none;
+
+                    &:visited {
+                        color: var(--primary);
+                    }
                 }
 
                 .no-authors {

@@ -28,7 +28,6 @@ export class NewsDetailsComponent implements OnInit {
 
     this._newsDetailsDataService.getLoadingState().subscribe((state) => {
       this.isDataLoaded = state;
-      console.log(this.isDataLoaded);
     });
   }
 
@@ -38,7 +37,8 @@ export class NewsDetailsComponent implements OnInit {
   }
 
   getCategoryName(label): string {
-    return AppConsts.newsCategoriesList.find((c) => c.key === label).name;
+    const findedCat = AppConsts.newsCategoriesList.find((c) => c.key === label)
+    return findedCat && findedCat.name;
   }
 
   handleImageError(event) {

@@ -46,13 +46,15 @@ export class AsideComponent implements OnInit {
   }
 
   findNews(): void {
+    console.log(this.selectedLangs);
     const params = new RouteApiParams();
     params.category = this.selectedCategories && this.selectedCategories.length ? this.getFiltersValues(this.selectedCategories) : this.resetAllCategories();
     params.types = this.selectedNewsTypes && this.selectedNewsTypes?.length ? this.getFiltersValues(this.selectedNewsTypes) : this.resetAllNewsTypes();
     params.langs = this.selectedLangs && this.selectedLangs.length ? this.getFiltersValues(this.selectedLangs) : this.resetAllLangs();
     params.searchString = null;
     params.dateStart = this.isRangeActive && this.dateRange && this.dateRange[0] ? this.getDateForApiFormat(this.dateRange[0]) : this.getDateForApiFormat(this.date);
-    params.dateEnd = this.isRangeActive && this.dateRange && this.dateRange[1] ? this.getDateForApiFormat(this.dateRange[1]) : undefined;
+    params.dateEnd = this.isRangeActive && this.dateRange && this.dateRange[1] ? this.getDateForApiFormat(this.dateRange[1]) : this.getDateForApiFormat(this.date);
+    params.page = 1;
     this.router.navigate([], {
       queryParams: {},
     })
@@ -84,9 +86,9 @@ export class AsideComponent implements OnInit {
     return '';
   }
 
-  resetAllLangs(): string {
+  resetAllLangs(): string | string[] {
     this.selectedLangs = [AppConsts.lagsList[0]];
-    return '';
+    return this.getFiltersValues(this.selectedLangs);
   }
 
   resetAllCategories(): string[] {

@@ -61,7 +61,7 @@ export class GetNewsService {
       articlesCount: this.articlesCount,
       articlesSortBy: this.sortByString || 'date',
       lang: this.langs,
-      articlesSortByAsc: false,
+      articlesSortByAsc: !!(this.dateEnd && this.dateStart),
       resultType: 'articles',
       apiKey: this.API_KEY,
       ignoreSourceUri: this.urlExludes,
@@ -74,7 +74,7 @@ export class GetNewsService {
       dateEnd: this.dateEnd,
     };
 
-    // console.log(params, 'REQUESTED');
+    console.log(params, 'REQUESTED');
     // return new Observable();
 
     return this.http

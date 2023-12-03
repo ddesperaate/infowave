@@ -1,7 +1,7 @@
 <div class="details">
     <div *ngIf="isDataLoaded" class="details__body">
         <div class="details__top-section top-section">
-            <a [href]="newsDetail.url" target="_blank" [title]="newsDetail.source?.dataType" class="top-section__source-info">
+            <a [href]="'mailto:' + newsDetail.url" target="_blank" [title]="newsDetail.source?.dataType" class="top-section__source-info">
                 <span class="title">{{ newsDetail.source.title }}</span>
                 <span class="url">{{ newsDetail.source.uri + ' ' +  newsDetail.date + ' ' + newsDetail.time}}</span>
             </a>
@@ -13,7 +13,7 @@
             <div class="top-section__authors">
                 <span class="author">Автори:</span> 
                 <a *ngFor="let author of newsDetail.authors" [href]="author.uri" target="_blank" class="author-name">
-                    {{ author.name }}
+                    &nbsp; {{ author.name }}
                 </a>
                 <span class="no-authors" *ngIf="!newsDetail.authors || newsDetail.authors?.length === 0"> (не зазначено) </span>
             </div>

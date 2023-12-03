@@ -83,6 +83,7 @@
       </div>
       <div *ngIf="isPageLoaded" class="paginator-container">
         <p-paginator
+          #paginator
           (onPageChange)="onPageChange($event)"
           [first]="first"
           [rows]="rows"

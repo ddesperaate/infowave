@@ -51,9 +51,9 @@
             </div>
         </div>
         <div class="section__values">
-            <p-calendar *ngIf="!isRangeActive" [(ngModel)]="date" [maxDate]="maxDate" [showIcon]="true" [touchUI]="isMobileDevice"
+            <p-calendar *ngIf="!isRangeActive" [(ngModel)]="date" [dateFormat]="'dd.mm.yy'" [maxDate]="maxDate" [showIcon]="true" [touchUI]="isMobileDevice"
                 [placeholder]="'Оберіть дату'"></p-calendar>
-            <p-calendar *ngIf="isRangeActive" [(ngModel)]="dateRange" [maxDate]="maxDate" [selectionMode]="'range'" [showIcon]="true"
+            <p-calendar *ngIf="isRangeActive" [(ngModel)]="dateRange" [dateFormat]="'dd.mm.yy'" [maxDate]="maxDate" [selectionMode]="'range'" [showIcon]="true"
                 [touchUI]="isMobileDevice" [placeholder]="'Оберіть період'"></p-calendar>
         </div>
     </div>

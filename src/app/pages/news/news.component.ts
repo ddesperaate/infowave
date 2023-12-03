@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Message, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Paginator } from 'primeng/paginator';
 import { GetNewsService } from 'src/app/api/getNews.service';
 import { NewsDetailsComponent } from 'src/app/components/news-details/news-details.component';
 import { NewsDetailsService } from 'src/app/shared/services/newsDetailsData.service';
@@ -17,6 +18,7 @@ import {
   providers: [DialogService, MessageService],
 })
 export class NewsPageComponent implements OnInit {
+  @ViewChild('paginator', { static: true }) paginator: Paginator;
   searchText: string = '';
   articles: NewsArticle[] = [];
   mainArticle: NewsArticle = new NewsArticle();
@@ -43,7 +45,6 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getStartNews();
     this._getNewsService.initListeners();
     this._filtersService.getParams().subscribe((params) => {
       this.getStartNews();
@@ -63,6 +64,7 @@ export class NewsPageComponent implements OnInit {
       }
       this.totalCount = res.articles.totalResults;
       this.articles = res.articles.results;
+      console.log(res, 'news page results');
       setTimeout(()=> this.isPageLoaded = true, 800);
     });
   }

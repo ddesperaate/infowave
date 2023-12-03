@@ -3,11 +3,11 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 96%;
-    padding-top: 1rem;
+    padding: 1rem 0;
 
     @media(max-width: 1280px) {
         width: 100%;
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-items: center;
     }
 
