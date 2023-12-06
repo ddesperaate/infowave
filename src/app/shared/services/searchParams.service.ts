@@ -7,7 +7,6 @@ import { AppConsts } from '../AppConsts';
   providedIn: 'root'
 })
 export class FiltersService {
-
   private params: BehaviorSubject<RouteApiParams> = new BehaviorSubject({
     searchString: '',
     category: AppConsts.newsCategoriesList.map((c) => c.key),
@@ -19,14 +18,11 @@ export class FiltersService {
     dateStart: undefined,
     dateEnd: undefined,
   });
-  private routePrarms: RouteApiParams = new RouteApiParams();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
-  ) {
-
-  }
+  ) { }
 
   initRouteListener(): void {
     this.route.queryParams.subscribe((p: RouteApiParams) => {
