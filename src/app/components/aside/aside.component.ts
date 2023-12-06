@@ -62,14 +62,6 @@ export class AsideComponent implements OnInit {
     this.mobileAsideClose.emit();
   }
 
-  showState(): void {
-    console.log({
-      selectedCategories: this.selectedCategories,
-      selectedNewsTypes: this.selectedNewsTypes,
-      selectedLangs: this.selectedLangs,
-    });
-  }
-
   getDateForApiFormat(date: Date): string | undefined {
     if (!date) return undefined;
     let result: string = '';

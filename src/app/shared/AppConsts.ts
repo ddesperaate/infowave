@@ -11,7 +11,6 @@ export class AppConsts {
         { name: 'Політика', key: 'news/Politics', icon: 'pi pi-fw pi-book' },
         { name: 'Бізнес', key: 'news/Business', icon: 'pi pi-fw pi-book' },
         { name: 'Спорт', key: 'news/Sports', icon: 'pi pi-fw pi-book' },
-        // { name: 'Environment', key: 'news/Environment' },
     ];
 
     static readonly lagsList: any[] = [

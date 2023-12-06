@@ -74,9 +74,6 @@ export class GetNewsService {
       dateEnd: this.dateEnd,
     };
 
-    console.log(params, 'REQUESTED');
-    // return new Observable();
-
     return this.http
       .post(this.API_URL, params)
       .pipe();

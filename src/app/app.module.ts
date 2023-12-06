@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common'; 
 import { AboutUsComponentModule } from './pages/about-us/about-us.component.module';
 import { ContactsComponentModule } from './pages/contacts/contacts.component.module';
-// import { AsideComponentModule } from './components/aside/aside.component.module';
+import { FiltersService } from './shared/services/searchParams.service';
 
 
 @NgModule({
@@ -32,11 +32,10 @@ import { ContactsComponentModule } from './pages/contacts/contacts.component.mod
     AboutUsComponentModule,
     ContactsComponentModule,
     HttpClientModule,
-    
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/infowave/' },
-    // {provide: LOCALE_ID, useValue: 'us'}
+    FiltersService,
   ],
   bootstrap: [AppComponent]
 })
